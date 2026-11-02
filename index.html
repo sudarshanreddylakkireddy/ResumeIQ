@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7fb">
+    <title>ResumeIQ — Your next opportunity starts here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+    <script src="analyzer.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="ResumeIQ home">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span>Resume<span class="brand-accent">IQ</span></span>
+      </a>
+      <div class="topbar-note"><span class="privacy-dot"></span> Private by design</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="sparkle" aria-hidden="true">✦</span> YOUR CAREER, IN FOCUS</div>
+        <h1>Make your resume<br><span class="gradient-text">work harder for you.</span></h1>
+        <p class="hero-copy">Get a clear, actionable review of your resume in seconds.<br class="desktop-break"> Know what's working and where to improve.</p>
+      </section>
+
+      <section class="analyzer-card" aria-labelledby="upload-heading">
+        <div class="card-heading">
+          <div class="step-number">01</div>
+          <div>
+            <h2 id="upload-heading">Start with your resume</h2>
+            <p>Upload a PDF to get your personalized analysis.</p>
+          </div>
+        </div>
+
+        <label class="dropzone" id="dropzone" for="resume-file" tabindex="0">
+          <input id="resume-file" type="file" accept="application/pdf,.pdf" hidden>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v3A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dropzone-title" id="file-prompt">Drop your resume here, or <span>browse files</span></span>
+          <span class="dropzone-hint" id="file-hint">PDF format · Up to 10 MB</span>
+        </label>
+
+        <div class="job-description">
+          <label for="job-description">Have a job in mind? <span>Optional</span></label>
+          <textarea id="job-description" rows="3" placeholder="Paste the job description to see how well your resume matches..."></textarea>
+          <span class="field-hint">We'll highlight relevant keywords you may be missing.</span>
+        </div>
+
+        <p class="status-message" id="status-message" role="status" aria-live="polite"></p>
+        <button class="analyze-button" id="analyze-button" type="button" disabled>
+          <span>Analyze my resume</span><span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="privacy-note"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2m-8 0h9v7h-9V7Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Your resume is analyzed in your browser and never uploaded to a server.</p>
+      </section>
+
+      <section class="results" id="results" aria-labelledby="results-heading" hidden>
+        <div class="results-header">
+          <div>
+            <div class="eyebrow">YOUR RESUME SNAPSHOT</div>
+            <h2 id="results-heading">Here's how you're doing</h2>
+          </div>
+          <button type="button" class="reset-button" id="reset-button">Analyze another <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="results-grid">
+          <article class="score-card">
+            <div class="score-ring" id="score-ring" role="img" aria-label="Resume score">
+              <div class="score-inner"><strong id="score-value">0</strong><span>out of 100</span></div>
+            </div>
+            <div class="score-copy"><span class="score-label">OVERALL SCORE</span><h3 id="score-title"></h3><p id="score-summary"></p></div>
+          </article>
+          <article class="detail-card">
+            <h3>Resume essentials</h3>
+            <p class="detail-subtitle">A quick check of important sections</p>
+            <ul class="checks-list" id="checks-list"></ul>
+          </article>
+          <article class="detail-card keywords-card">
+            <h3 id="keywords-heading">Skills &amp; keywords</h3>
+            <p class="detail-subtitle" id="keywords-subtitle"></p>
+            <div class="keyword-list" id="keyword-list"></div>
+          </article>
+          <article class="detail-card recommendations-card">
+            <h3>Ways to stand out</h3>
+            <p class="detail-subtitle">Small changes can make a big difference</p>
+            <ul class="recommendations-list" id="recommendations-list"></ul>
+          </article>
+        </div>
+        <p class="results-disclaimer">ResumeIQ offers general guidance, not a guarantee of how any specific ATS or employer will evaluate your resume.</p>
+      </section>
+
+      <section class="trust-row" aria-label="Privacy and compatibility">
+        <div><span class="trust-icon">✳</span><span><strong>Private &amp; secure</strong><small>Your file stays on your device</small></span></div>
+        <div><span class="trust-icon">◎</span><span><strong>ATS-aware insights</strong><small>Practical, easy-to-follow guidance</small></span></div>
+        <div><span class="trust-icon">⌁</span><span><strong>Made for your next step</strong><small>Clear feedback, no guesswork</small></span></div>
+      </section>
+    </main>
+    <footer>Built for your next opportunity <span aria-hidden="true">·</span> ResumeIQ</footer>
+  </body>
+</html>
