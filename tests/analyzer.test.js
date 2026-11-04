@@ -34,6 +34,17 @@ test("extracts recurring job keywords without common filler words", () => {
   assert.equal(keywords.includes("python"), true);
   assert.equal(keywords.includes("sql"), true);
   assert.equal(keywords.includes("communication"), true);
-  assert.equal(keywords.includes("requires"), true);
+  assert.equal(keywords.includes("requires"), false);
+  assert.equal(keywords.includes("important"), false);
   assert.equal(keywords.includes("the"), false);
+});
+
+test("ignores generic action words and weak qualifiers", () => {
+  const keywords = extractKeywords("Strong communication and leadership are required. We built a product with excellent results.");
+
+  assert.equal(keywords.includes("communication"), true);
+  assert.equal(keywords.includes("leadership"), true);
+  assert.equal(keywords.includes("strong"), false);
+  assert.equal(keywords.includes("required"), false);
+  assert.equal(keywords.includes("built"), false);
 });
