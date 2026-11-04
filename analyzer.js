@@ -16,13 +16,23 @@
     "product management", "statistics", "r", "rest api"
   ];
   const STOP_WORDS = new Set([
-    "about", "after", "also", "and", "are", "for", "from", "have", "into",
-    "its", "our", "the", "their", "this", "those", "with", "you", "your",
-    "will", "who", "what", "when", "where", "which", "while", "within",
-    "years", "year", "work", "working", "role", "team", "candidate", "must",
-    "should", "would", "could", "ability", "experience", "required",
-    "preferred", "including", "such", "across", "using", "plus", "ensure",
-    "need", "needs"
+    "about", "after", "also", "and", "are", "as", "at", "be", "been",
+    "being", "by", "could", "developer", "developed", "development",
+    "excellent", "experience", "for", "from", "have", "has", "having",
+    "if", "important", "including", "into", "is", "it", "its", "keywords",
+    "leadership", "must", "need", "needs", "not", "of", "on", "or", "our",
+    "our", "plus", "preferred", "professional", "qualifications", "required",
+    "requirements", "requires", "responsibilities", "role", "should",
+    "skills", "strong", "such", "team", "their", "this", "those", "using",
+    "we", "what", "when", "where", "which", "while", "who", "why",
+    "will", "with", "within", "work", "working", "would", "years", "year",
+    "you", "your", "across", "ability", "candidate", "ensure", "important"
+  ]);
+  const ACTION_WORDS = new Set([
+    "achieved", "built", "created", "delivered", "designed", "developed",
+    "drove", "enabled", "established", "improved", "increased", "launched",
+    "led", "managed", "optimized", "reduced", "resolved", "spearheaded",
+    "streamlined"
   ]);
   const SECTION_PATTERNS = {
     contact: /\b(email|e-mail|phone|linkedin|github|@)\b/i,
@@ -44,7 +54,12 @@
     const words = text.match(/[a-z][a-z+#.-]{2,}/g) || [];
     for (const word of words) {
       const normalized = word.replace(/^[.-]+|[.-]+$/g, "");
-      if (normalized.length < 4 || STOP_WORDS.has(normalized) || SKILLS.includes(normalized)) continue;
+      if (
+        normalized.length < 4 ||
+        STOP_WORDS.has(normalized) ||
+        ACTION_WORDS.has(normalized) ||
+        SKILLS.includes(normalized)
+      ) continue;
       counts.set(normalized, (counts.get(normalized) || 0) + 1);
     }
     return [...counts.entries()]
